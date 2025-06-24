@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Student_Management.Entities.UserAccount>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Application Number</th>
+            <th> First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.ApplicationNumber</td>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Email</td>
+                <td>@student.AdmissionStatus</td>
+                <td>
+                    <!-- Form to update status -->
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="id" value="@student.Id" />
+                        <button type="submit" name="status" value="Accepted" class="btn btn-success">Accept</button>
+                        <button type="submit" name="status" value="Rejected" class="btn btn-danger">Reject</button>
+                        <button type="submit" name="status" value="Pending" class="btn btn-warning">Pending</button>
+                        <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-info">Edit</a>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,154 @@
+﻿@model Student_Management.Models.RegistrationViewModel
+
+@{
+    ViewData["Title"] = "Student Registration";
+}
+
+<style>
+    label.error {
+        color: red;
+        font-size: 0.9rem;
+    }
+</style>
+
+
+
+<div class="container mt-3">
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="Registration" method="post" id="myForm" class="p-4 shadow-sm rounded bg-light">
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <!-- First Name -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="FirstName" class="form-label"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="LastName" class="form-label"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+
+            </div>
+
+            <!-- Email -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter your email address" />
+                <span id="error-Email" class="text-danger"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <span id="error-PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="DateOfBirth" class="form-label"></label>
+                <input asp-for="DateOfBirth" type="text" class="form-control" id="dob" placeholder="DD/MM/YYYY" />
+                <span id="error-DateOfBirth" class="text-danger"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group mb-3 col-md-6 mt-4">
+                <label class="form-label">Gender</label>
+                <div class="form-check">
+                    <input asp-for="Gender" type="radio" class="form-check-input" id="Male" value="Male" />
+                    <label for="Male" class="form-check-label">Male</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="Gender" type="radio" class="form-check-input" id="Female" value="Female" />
+                    <label for="Female" class="form-check-label">Female</label>
+                </div>
+                <span id="error-Gender" class="text-danger"></span>
+            </div>
+
+            <!-- State -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="State" class="form-label"></label>
+                <select asp-for="State" asp-items="Model.StateList" class="form-control">
+                    <option value="">-- Select State --</option>
+                </select>
+                <span id="error-State" class="text-danger"></span>
+            </div>
+
+            <!-- LGA -->
+            <div class="form-group mb-3 col-md-6">
+                <label asp-for="LGA" class="form-label"></label>
+                <select asp-for="LGA" asp-items="Model.LGAList" class="form-control" id="lgaDropdown">
+                    <option value="">-- Select LGA --</option>
+                </select>
+                <span id="error-LGA" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit" class="btn btn-primary btn-lg px-5">Register</button>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+
+    <!-- Load jQuery FIRST -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Load jQuery UI Datepicker CSS and JS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- Datepicker Initialization AFTER jQuery and Datepicker are loaded -->
+    <script>
+        $(function () {
+            $("#dob").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:2025"
+            });
+        });
+    </script>
+
+    <!-- Your LGA Fetch Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stateDropdown = document.querySelector('[name="State"]');
+            const lgaDropdown = document.getElementById('lgaDropdown');
+
+            stateDropdown.addEventListener("change", function () {
+                const selectedState = this.value;
+
+                if (selectedState) {
+                    fetch(`/Student/GetLgasByState?state=${encodeURIComponent(selectedState)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            lgaDropdown.innerHTML = '<option value="">-- Select LGA --</option>';
+                            data.forEach(lga => {
+                                const option = document.createElement('option');
+                                option.value = lga;
+                                option.text = lga;
+                                lgaDropdown.appendChild(option);
+                            });
+                        });
+                } else {
+                    lgaDropdown.innerHTML = '<option value="">-- Select LGA --</option>';
+                }
+            });
+        });
+    </script>
+
+    <!-- Form Validation -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="~/js/form-validation.js"></script>
+}
+

@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Registration Successful";
+}
+
+<div class="container mt-5 text-center">
+    <h2>@ViewData["Title"]</h2>
+    <p>Your registration was successful.</p>
+    <p>Copy Out Your Application Number</p>
+    <p><strong>Your application number is:</strong> <span class="text-primary">@ViewBag.ApplicationNumber</span></p>
+    <a asp-controller="Student" asp-action="CheckStatus" class="btn btn-info mt-3">Check Admission Status</a>
+</div>

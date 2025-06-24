@@ -1,0 +1,21 @@
+﻿@model Student_Management.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Check Admission Status";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="CheckAdmission" method="post">
+    <div class="form-group">
+        <label for="ApplicationNumber">Application Number</label>
+        <input type="text" id="ApplicationNumber" name="ApplicationNumber" class="form-control" value="@Model.ApplicationNumber" />
+    </div>
+
+    <button type="submit" class="btn btn-info">Check Status</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}

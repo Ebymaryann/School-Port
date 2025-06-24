@@ -1,0 +1,34 @@
+﻿@model Student_Management.Entities.UserAccount
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<h2>Edit Student</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    @* <div class="form-group"> *@
+    @*     <label asp-for="AdmissionStatus"></label> *@
+    @*     <select asp-for="AdmissionStatus" class="form-control" asp-items="Html.GetEnumSelectList<ApplicationStatus>()"></select> *@
+    @* </div> *@
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

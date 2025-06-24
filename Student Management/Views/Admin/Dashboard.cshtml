@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Optional if using _ViewStart.cshtml
+}
+
+<div class="container-fluid">
+    <h2 class="mb-4">Welcome, Admin!</h2>
+
+    <div class="row g-4">
+        <!-- Students Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Students</h5>
+                    <p class="card-text display-6">@ViewBag.StudentCount</p>
+                    <a href="@Url.Action("Index", "Admin")" class="text-white text-decoration-underline">View Students</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Courses</h5>
+                    <p class="card-text display-6">@ViewBag.CourseCount</p>
+                    <a href="@Url.Action("AddCourse", "Admin")" class="text-white text-decoration-underline">Add Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-warning text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Departments</h5>
+                    <p class="card-text display-6">@ViewBag.DeptCount</p>
+                    <a href="@Url.Action("AddDepartment", "Admin")" class="text-dark text-decoration-underline">Add Department</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecturers Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Lecturers</h5>
+                    <p class="card-text display-6">@ViewBag.LecturerCount</p>
+                    <a href="@Url.Action("RegisterLecturer", "Admin")" class="text-white text-decoration-underline">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Recent Actions Section -->
+    <div class="mt-5">
+        <h4>Quick Actions</h4>
+        <div class="list-group">
+            <a href="@Url.Action("AddCourse", "Admin")" class="list-group-item list-group-item-action">➕ Add New Course</a>
+            <a href="@Url.Action("RegisterLecturer", "Admin")" class="list-group-item list-group-item-action">👨‍🏫 Register New Lecturer</a>
+            <a href="@Url.Action("ManageUsers", "Admin")" class="list-group-item list-group-item-action">🛠 Manage All Users</a>
+        </div>
+    </div>
+</div>
+
