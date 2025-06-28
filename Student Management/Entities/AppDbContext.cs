@@ -16,6 +16,8 @@ namespace Student_Management.Entities
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<Department> Departments { get; set; }   // ✅ Add this
         public DbSet<Course> Courses { get; set; }           // ✅ Add this
+        public DbSet<Assignment> Assignments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

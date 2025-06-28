@@ -1,0 +1,35 @@
+﻿@model Student_Management.Models.PaymentViewModel
+
+@{
+    ViewData["Title"] = "Fake Payment";
+}
+
+<h2 class="text-center">Complete Payment</h2>
+
+<form asp-action="Payment" method="post" class="p-4 shadow-sm rounded bg-light">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label>Card Number</label>
+        <input asp-for="CardNumber" class="form-control" placeholder="Enter 16-digit card number" />
+        <span asp-validation-for="CardNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>CVV</label>
+        <input asp-for="CVV" class="form-control" placeholder="Enter 3-digit CVV" />
+        <span asp-validation-for="CVV" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Expiry Date</label>
+        <input asp-for="ExpiryDate" class="form-control" placeholder="MM/YY" />
+        <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Proceed to Registration</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -144,3 +144,4 @@ C:\Users\USER\source\repos\My Projects\Student Management\Student Management\bin
 C:\Users\USER\source\repos\My Projects\Student Management\Student Management\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\USER\source\repos\My Projects\Student Management\Student Management\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\USER\source\repos\My Projects\Student Management\Student Management\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\USER\source\repos\My Projects\Student Management\Student Management\obj\Debug\net8.0\Student Management.sourcelink.json

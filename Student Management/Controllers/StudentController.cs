@@ -61,33 +61,51 @@ namespace Student_Management.Controllers
             return Json(new List<string>());
         }
 
-
-
         [HttpGet]
+        public IActionResult Payment()
+        {
+            return View(new PaymentViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Payment(PaymentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            HttpContext.Session.SetString("PaymentStatus", "Paid");
+
+            return RedirectToAction("Registration", "Student");
+        }
+
+
+
+
         public IActionResult Registration()
         {
+            var paymentStatus = HttpContext.Session.GetString("PaymentStatus");
+
+            if (string.IsNullOrEmpty(paymentStatus) || paymentStatus != "Paid")
+            {
+                return RedirectToAction("Payment");
+            }
+
             var model = new RegistrationViewModel();
 
-            // Populate states
             model.StateList = StudentController.NigerianStatesWithLGAs.Keys
                 .Select(x => new SelectListItem { Value = x, Text = x })
                 .ToList();
 
-            // If you want to preload LGA list for a specific state (e.g., in edit mode), do:
-            if (!string.IsNullOrEmpty(model.State) &&
-                StudentController.NigerianStatesWithLGAs.ContainsKey(model.State))
-            {
-                model.LGAList = StudentController.NigerianStatesWithLGAs[model.State]
-                    .Select(lga => new SelectListItem { Value = lga, Text = lga })
-                    .ToList();
-            }
-            else
-            {
-                model.LGAList = new List<SelectListItem>();
-            }
+            model.LGAList = new List<SelectListItem>();
 
             return View(model);
         }
+
+
+
 
 
 
@@ -101,11 +119,11 @@ namespace Student_Management.Controllers
                     .Select(state => new SelectListItem { Value = state, Text = state })
                     .ToList();
 
-             ModelState.Remove(nameof(model.StateList));
+            ModelState.Remove(nameof(model.StateList));
 
             if (!ModelState.IsValid)
             {
-                return View(model); 
+                return View(model);
             }
 
             var newStudent = new UserAccount
@@ -133,6 +151,9 @@ namespace Student_Management.Controllers
 
 
         }
+
+
+
 
 
         [HttpGet]
