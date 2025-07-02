@@ -14,9 +14,11 @@ namespace Student_Management.Entities
 
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<Department> Departments { get; set; }   // ✅ Add this
-        public DbSet<Course> Courses { get; set; }           // ✅ Add this
+        public DbSet<Department> Departments { get; set; }   
+        public DbSet<Course> Courses { get; set; }           
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<AssignmentSubmission> AssignmentSubmissions { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

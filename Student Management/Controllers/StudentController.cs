@@ -159,6 +159,12 @@ namespace Student_Management.Controllers
         [HttpGet]
         public ActionResult CheckAdmission()
         {
+            var paymentStatus = HttpContext.Session.GetString("PaymentStatus");
+
+            if (string.IsNullOrEmpty(paymentStatus) || paymentStatus != "Paid")
+            {
+                return RedirectToAction("Payment");
+            }
             return View(new LoginViewModel());
         }
 
@@ -174,6 +180,7 @@ namespace Student_Management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckAdmission(LoginViewModel model)
         {
+
             if (string.IsNullOrEmpty(model.ApplicationNumber))
             {
                 ViewBag.Message = "Please enter your application number.";

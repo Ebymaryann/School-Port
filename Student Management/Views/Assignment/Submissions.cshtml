@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Student_Management.Entities.AssignmentSubmission>
+
+@{
+    ViewData["Title"] = "Assignment Submissions";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Assignment Submissions</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No submissions yet.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Assignment</th>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Answer</th>
+                    <th>Date Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var submission in Model)
+                {
+                    <tr>
+                        <td>@submission.StudentId</td>
+                        <td>@submission.Assignment?.Title</td>
+                        <td>@submission.Assignment?.Course?.Code</td>
+                        <td>@submission.Assignment?.Course?.Title</td>
+                        <td>@submission.Answer</td>
+                        <td>@submission.DateSubmitted.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
+

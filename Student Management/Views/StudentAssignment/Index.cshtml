@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Student_Management.Entities.Assignment>
+@{
+    ViewData["Title"] = "Available Assignments";
+}
+
+<div class="container mt-4">
+    <h3 class="mb-3">Available Assignments</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.DueDate.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Course?.Code</td>
+                    <td>@item.Course?.Title</td>
+                    <td>
+                        <a asp-action="Submit" asp-route-id="@item.Id" class="btn btn-sm btn-success">Submit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

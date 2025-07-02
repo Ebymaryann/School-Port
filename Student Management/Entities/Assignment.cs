@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Student_Management.Entities
 {
@@ -17,5 +18,13 @@ namespace Student_Management.Entities
         public DateTime DueDate { get; set; }
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
+
+        [Required]
+        public int CourseId { get; set; }  // Foreign Key to Course
+
+        [ForeignKey("CourseId")]
+        public virtual Course Course { get; set; }  // Mark as virtual for EF lazy loading / proxy support
+
+        public virtual ICollection<AssignmentSubmission> Submissions { get; set; } = new List<AssignmentSubmission>(); // Initialize to avoid null issues
     }
 }

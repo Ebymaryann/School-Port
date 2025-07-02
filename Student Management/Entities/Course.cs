@@ -5,7 +5,7 @@ namespace Student_Management.Entities
 {
     public class Course
     {
-        public int CourseId { get; set; } // Primary Key
+        public int CourseId { get; set; } 
 
         [Required]
         public string Code { get; set; }
@@ -15,8 +15,6 @@ namespace Student_Management.Entities
 
         [Required]
         public int DepartmentId { get; set; }
-
-        // Navigation Property
         public Department Department { get; set; }
         public ICollection<Lecturer> Lecturers { get; set; }
     }

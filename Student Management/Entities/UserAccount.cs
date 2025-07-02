@@ -46,11 +46,11 @@ namespace Student_Management.Entities
         public string LGA { get; set; }
 
 
-        public string ApplicationNumber { get; set; } // Auto-generated
+        public string ApplicationNumber { get; set; } 
 
         public ApplicationStatus AdmissionStatus { get; set; }
 
-        public DateTime DateOfApplication { get; set; } // Captures application submission date
+        public DateTime DateOfApplication { get; set; } 
 
         public bool IsDeleted { get; set; }
 

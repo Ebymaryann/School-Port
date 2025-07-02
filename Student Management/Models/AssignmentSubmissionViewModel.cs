@@ -8,6 +8,9 @@ namespace Student_Management.Models
 
         public string AssignmentTitle { get; set; } // For displaying assignment title in the form
 
+        [Required]
+        public string StudentId { get; set; }
+
         [Required(ErrorMessage = "Please provide your answer.")]
         public string Answer { get; set; }
     }

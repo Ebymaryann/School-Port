@@ -1,34 +1,46 @@
-﻿@model Student_Management.Entities.UserAccount
+﻿@model Student_Management.Entities.Assignment
 
 @{
-    ViewData["Title"] = "Edit Student";
+    ViewData["Title"] = "Edit Assignment";
 }
 
-<h2>Edit Student</h2>
+<h2 class="mb-3">Edit Assignment</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" class="p-4 shadow-sm bg-light rounded">
     <input type="hidden" asp-for="Id" />
 
-    <div class="form-group">
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="DueDate" class="form-label"></label>
+        <input asp-for="DueDate" type="date" class="form-control" />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
     </div>
 
-    @* <div class="form-group"> *@
-    @*     <label asp-for="AdmissionStatus"></label> *@
-    @*     <select asp-for="AdmissionStatus" class="form-control" asp-items="Html.GetEnumSelectList<ApplicationStatus>()"></select> *@
-    @* </div> *@
+    <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select asp-for="CourseId" class="form-control" required>
+            <option value="">-- Select Course --</option>
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.CourseId" selected="@(course.CourseId == Model.CourseId ? "selected" : null)">
+                    @course.Title (@course.Code)
+                </option>
+            }
+        </select>
+        <span asp-validation-for="CourseId" class="text-danger"></span>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </form>

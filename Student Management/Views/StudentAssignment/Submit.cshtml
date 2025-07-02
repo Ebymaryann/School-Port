@@ -1,0 +1,25 @@
+﻿@model Student_Management.Models.AssignmentSubmissionViewModel
+@{
+    ViewData["Title"] = "Submit Assignment";
+}
+
+<div class="container mt-4">
+    <h2>Submit Assignment</h2>
+
+    <form asp-action="Submit" method="post" class="shadow p-4 bg-light rounded">
+        <input type="hidden" asp-for="AssignmentId" />
+
+        <div class="mb-3">
+            <label class="form-label">Assignment Title:</label>
+            <p class="form-control-plaintext">@Model.AssignmentTitle</p>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Answer" class="form-label"></label>
+            <textarea asp-for="Answer" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Answer" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

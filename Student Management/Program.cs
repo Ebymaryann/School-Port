@@ -23,7 +23,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // Authentication and cookie settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login"; // Redirect unauthenticated users to this path
+    options.LoginPath = "/Account/Login";
 });
 
 builder.Services.AddTransient<EmailSender>();
@@ -33,7 +33,6 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Apply any pending migrations
 
 using (var scope = app.Services.CreateScope())
 {
@@ -42,7 +41,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = services.GetRequiredService<AppDbContext>();
     dbContext.Database.Migrate();
 
-    await CreateAdminUserAsync(services); // ? CALL THE METHOD HERE
+    await CreateAdminUserAsync(services); 
 }
 
 // Configure the HTTP request pipeline
@@ -58,7 +57,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Ensure this comes before Authorization
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 // Route configuration
@@ -91,7 +90,7 @@ async Task CreateAdminUserAsync(IServiceProvider serviceProvider)
         }
     }
 
-    // Step 2: Create default admin user (optional but helpful)
+    // Step 2: Create default admin user 
     string adminEmail = "admin@example.com";
     string adminPassword = "Admin@123";
 

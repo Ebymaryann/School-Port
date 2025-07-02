@@ -15,7 +15,7 @@ namespace Student_Management.Entities
         public Assignment Assignment { get; set; }
 
         [Required]
-        public string StudentId { get; set; } // This can be the student's username or a unique identifier
+        public string StudentId { get; set; } 
 
         [Required]
         public string Answer { get; set; }

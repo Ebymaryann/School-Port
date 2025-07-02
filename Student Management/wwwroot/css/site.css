@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    margin-bottom: 60px;
 }
 
 .min-vh-100 {
@@ -28,7 +29,15 @@ body {
 .card {
     border-radius: 0.5rem;
 }
-/*.text-danger {
-    color: red;
-}*/
+.text-purple {
+    color: purple;
+}
 
+.btn-purple {
+    background-color: purple;
+    color: white;
+}
+
+    .btn-purple:hover {
+        background-color: #5a005a;
+    }
